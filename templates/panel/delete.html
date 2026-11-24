@@ -1,0 +1,14 @@
+{% extends "panel/base.html" %}
+{% block title %}Delete {{ m.one }}{% endblock %}
+{% block crumbs %}{% icon "chevron-right" %}<a href="{% url 'cms_list' key %}">{{ m.label }}</a>{% icon "chevron-right" %}<span>Delete</span>{% endblock %}
+{% block content %}
+<section class="box box--narrow confirm">
+  <span class="module__icon module__icon--danger">{% icon "trash-2" %}</span>
+  <h1>Delete this {{ m.one }}?</h1>
+  <p>“{{ obj }}” will be removed permanently. This can't be undone.</p>
+  <form method="post">{% csrf_token %}
+    <a class="pbtn" href="{% url 'cms_edit' key obj.pk %}">Cancel</a>
+    <button class="pbtn pbtn--danger-solid" type="submit">Delete {{ m.one }}</button>
+  </form>
+</section>
+{% endblock %}

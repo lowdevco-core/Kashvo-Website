@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block default_title %}Why Kashvo · Billing, POS and books in one app{% endblock %}
+{% block description %}{{ seo.meta_description|default:"How Kashvo compares to typical billing and accounting software in India: POS, GST, books and UPI in one browser app, with no installs, no double entry and a free plan." }}{% endblock %}
+{% block keywords %}{{ seo.meta_keywords|default:"best billing software India, billing software comparison, GST software alternative, POS and accounting software, Kashvo" }}{% endblock %}
+{% block content %}
+<section class="phero">
+  <div class="wrap">
+    <span class="eyebrow">Why Kashvo</span>
+    <h1>One app where most shops use three.</h1>
+    <p class="lead">A billing app for invoices, a POS for the counter, accounting software for the books. Kashvo is all three, so the numbers never need to be matched up at month end.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head reveal"><span class="eyebrow">The difference</span><h2>What you get with Kashvo.</h2></div>
+    <div class="grid grid--3 features stagger">
+      <div class="feature"><div class="feature__icon">{% icon "link" %}</div><h3>The bill is the entry</h3><p>Every sale, purchase and payment posts to the books as it happens. Nothing to export, nothing to type twice.</p></div>
+      <div class="feature"><div class="feature__icon">{% icon "keyboard" %}</div><h3>Keyboard-first counter</h3><p>F1 to F8 shortcuts bill a regular customer in a few keystrokes, without reaching for the mouse.</p></div>
+      <div class="feature"><div class="feature__icon">{% icon "qr-code" %}</div><h3>UPI that confirms</h3><p>Shows your QR and saves the bill only once you confirm the money arrived. No half-paid bills in your reports.</p></div>
+      <div class="feature"><div class="feature__icon">{% icon "monitor-smartphone" %}</div><h3>Nothing to install</h3><p>Runs in the browser on a PC or phone. No licence keys, no Windows-only setup, no backups on a pen drive.</p></div>
+      <div class="feature"><div class="feature__icon">{% icon "lock" %}</div><h3>Year-end that stays closed</h3><p>Close the financial year and it's locked, so the figures you filed can't change by accident.</p></div>
+      <div class="feature"><div class="feature__icon">{% icon "graduation-cap" %}</div><h3>No accounting to learn</h3><p>Trial balance, P&amp;L and balance sheet without debits and credits.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--tint">
+  <div class="wrap">
+    <div class="section-head reveal"><span class="eyebrow">Side by side</span><h2>How it compares.</h2>
+      <p class="lead">Against the two setups most shops use today: installed desktop accounting software, and basic mobile billing apps.</p></div>
+    <div class="table-scroll reveal">
+      <table class="compare">
+        <thead><tr><th>Feature</th><th class="us">Kashvo</th><th>Desktop accounting</th><th>Basic billing app</th></tr></thead>
+        <tbody>
+          <tr><td>GST invoices with CGST / SGST / IGST split</td><td class="us yes">{% icon "check" %}</td><td class="yes">{% icon "check" %}</td><td class="part">Partly</td></tr>
+          <tr><td>Full-screen POS with barcode scanning</td><td class="us yes">{% icon "check" %}</td><td class="part">Add-on</td><td class="part">Basic</td></tr>
+          <tr><td>58 mm / 80 mm thermal receipts</td><td class="us yes">{% icon "check" %}</td><td class="part">Needs setup</td><td class="yes">{% icon "check" %}</td></tr>
+          <tr><td>UPI QR with payment confirmation</td><td class="us yes">{% icon "check" %}</td><td class="no">{% icon "minus" %}</td><td class="part">QR only</td></tr>
+          <tr><td>Books balance automatically</td><td class="us yes">{% icon "check" %}</td><td class="part">Needs an accountant</td><td class="no">{% icon "minus" %}</td></tr>
+          <tr><td>Works on any PC or phone</td><td class="us yes">{% icon "check" %}</td><td class="part">Windows only</td><td class="part">Phone only</td></tr>
+          <tr><td>No install, automatic updates</td><td class="us yes">{% icon "check" %}</td><td class="no">{% icon "minus" %}</td><td class="yes">{% icon "check" %}</td></tr>
+          <tr><td>Free plan</td><td class="us yes">{% icon "check" %}</td><td class="no">{% icon "minus" %}</td><td class="part">With limits</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head reveal"><span class="eyebrow">Switching</span><h2>Move over in an afternoon.</h2></div>
+    <ol class="steps stagger">
+      <li><b>Export</b><span>Download your items and parties from your current software as Excel or CSV.</span></li>
+      <li><b>Import</b><span>Upload them to Kashvo. The columns are matched for you.</span></li>
+      <li><b>Bill</b><span>Open the POS and make your first sale the same day.</span></li>
+    </ol>
+  </div>
+</section>
+{% endblock %}

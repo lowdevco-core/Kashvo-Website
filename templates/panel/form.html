@@ -1,0 +1,84 @@
+{% extends "panel/base.html" %}
+{% block title %}{% if obj %}Edit {{ m.one }}{% else %}New {{ m.one }}{% endif %}{% endblock %}
+{% block head %}{{ form.media }}{% endblock %}
+{% block crumbs %}{% icon "chevron-right" %}<a href="{% url 'cms_list' key %}">{{ m.label }}</a>{% icon "chevron-right" %}<span>{% if obj %}{{ obj|truncatechars:40 }}{% else %}New {{ m.one }}{% endif %}</span>{% endblock %}
+{% block content %}
+<form method="post" enctype="multipart/form-data" novalidate{% if key != 'posts' %} class="form--compact"{% endif %}>
+  {% csrf_token %}
+  <div class="page-head">
+    <div><h1>{% if obj %}Edit {{ m.one }}{% else %}New {{ m.one }}{% endif %}</h1>{% if obj and key == 'posts' %}<p><a href="{{ obj.get_absolute_url }}" target="_blank">{{ SITE_URL }}{{ obj.get_absolute_url }}</a></p>{% endif %}</div>
+    <div class="page-head__actions">
+      {% if obj %}<a class="pbtn pbtn--danger" href="{% url 'cms_delete' key obj.pk %}">{% icon "trash-2" %}Delete</a>{% endif %}
+      <button class="pbtn" type="submit" name="add_another">Save and add another</button>
+      <button class="pbtn pbtn--primary" type="submit">{% icon "check" %}Save</button>
+    </div>
+  </div>
+  {% if form.non_field_errors %}<div class="toast toast--error">{% icon "circle-alert" %}{{ form.non_field_errors|join:" " }}</div>{% endif %}
+
+  {% if key == 'posts' %}
+  <div class="editor">
+    <div class="editor__main">
+      <section class="box">
+        {% include "panel/_field.html" with f=form.title %}
+        <div class="field">
+          <label for="{{ form.slug.id_for_label }}">URL slug</label>
+          <div class="slug"><span>/blog/</span>{{ form.slug }}<span>/</span></div>
+          <small>Changing the slug of a published post keeps the old link working with a 301 redirect.</small>
+          {% for e in form.slug.errors %}<em class="err">{{ e }}</em>{% endfor %}
+        </div>
+        <div class="field field--editor"><label>Content</label>{{ form.body }}{% for e in form.body.errors %}<em class="err">{{ e }}</em>{% endfor %}</div>
+        {% include "panel/_field.html" with f=form.excerpt %}
+      </section>
+      <section class="box">
+        <div class="box__head"><h2>Search engine (SEO)</h2></div>
+        {% include "panel/_field.html" with f=form.meta_title counter=60 %}
+        {% include "panel/_field.html" with f=form.meta_description counter=160 %}
+        {% include "panel/_field.html" with f=form.meta_keywords %}
+        {% include "panel/_field.html" with f=form.og_image %}
+        {% include "panel/_field.html" with f=form.noindex %}
+      </section>
+    </div>
+    <aside class="editor__side">
+      <section class="box">
+        <div class="box__head"><h2>Publish</h2></div>
+        {% include "panel/_field.html" with f=form.status %}
+        {% include "panel/_field.html" with f=form.published_at %}
+        {% include "panel/_field.html" with f=form.featured %}
+      </section>
+      <section class="box">
+        <div class="box__head"><h2>Organise</h2></div>
+        {% include "panel/_field.html" with f=form.category %}
+        <div class="field"><label>Tags</label><div class="checks">{{ form.tags }}</div></div>
+      </section>
+      <section class="box">
+        <div class="box__head"><h2>Cover image</h2></div>
+        {% include "panel/_field.html" with f=form.cover %}
+        {% include "panel/_field.html" with f=form.cover_alt %}
+      </section>
+    </aside>
+  </div>
+  {% else %}
+  <section class="box box--form">
+    {% for f in form %}{% include "panel/_field.html" %}{% endfor %}
+  </section>
+  {% endif %}
+</form>
+{% endblock %}
+{% block scripts %}
+<script>
+  // fill the slug from the title until someone edits the slug by hand
+  const title = document.getElementById("id_title") || document.getElementById("id_name");
+  const slug = document.getElementById("id_slug");
+  if (title && slug) {
+    let auto = !slug.value;
+    const slugify = (s) => s.toLowerCase().normalize("NFKD").replace(/[^\w\s-]/g, "").trim().replace(/[\s_-]+/g, "-").slice(0, 200);
+    title.addEventListener("input", () => { if (auto) slug.value = slugify(title.value); });
+    slug.addEventListener("input", () => { auto = !slug.value; });
+  }
+  document.querySelectorAll("[data-counter]").forEach((input) => {
+    const out = input.parentElement.querySelector(".counter"), max = +input.dataset.counter;
+    const update = () => { out.textContent = `${input.value.length} / ${max}`; out.classList.toggle("is-over", input.value.length > max); };
+    input.addEventListener("input", update); update();
+  });
+</script>
+{% endblock %}

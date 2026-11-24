@@ -1,0 +1,68 @@
+{% load static %}<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>{% block title %}Dashboard{% endblock %} · Kashvo CMS</title>
+  <link rel="icon" href="{% static 'img/favicon.svg' %}" type="image/svg+xml">
+  <link rel="stylesheet" href="{% static 'css/panel.css' %}?v=1.1">
+  {% block head %}{% endblock %}
+</head>
+<body>
+<div class="shell" id="shell">
+  <aside class="side" aria-label="CMS navigation">
+    <a class="side__logo" href="{% url 'cms_dashboard' %}"><img src="{% static 'img/kashvo-lockup.svg' %}" alt="Kashvo" width="124" height="37"><span>CMS</span></a>
+    <div class="profile">
+      <div class="profile__avatar">{{ user.first_name|default:user.username|slice:":1"|upper }}{{ user.last_name|slice:":1"|upper }}</div>
+      <div class="profile__name">{{ user.get_full_name|default:user.username }}</div>
+      <div class="profile__role">{% if user.is_superuser %}Super admin{% else %}Editor{% endif %}</div>
+    </div>
+    <nav class="side__nav">
+      <a class="nav-item {% if active == 'dashboard' %}is-active{% endif %}" href="{% url 'cms_dashboard' %}">{% icon "layout-dashboard" %}<span>Dashboard</span></a>
+      {% for title, items in nav %}
+      <details class="nav-group" {% for k, m in items %}{% if active == k %}open{% endif %}{% endfor %}{% if forloop.first %} open{% endif %}>
+        <summary class="nav-item">{% with first=items.0.1 %}{% icon first.icon %}{% endwith %}<span>{{ title }}</span>{% icon "chevron-down" "nav-caret" %}</summary>
+        <div class="nav-sub">
+          {% for k, m in items %}
+          <a class="{% if active == k %}is-active{% endif %}" href="{% url 'cms_list' k %}">{{ m.label }}</a>
+          {% endfor %}
+        </div>
+      </details>
+      {% endfor %}
+    </nav>
+    <div class="side__foot">
+      <a class="nav-item" href="{% url 'home' %}" target="_blank">{% icon "external-link" %}<span>View website</span></a>
+      {% if user.is_superuser %}<a class="nav-item" href="/django-admin/">{% icon "settings" %}<span>Django admin</span></a>{% endif %}
+    </div>
+  </aside>
+
+  <div class="main">
+    <header class="bar">
+      <button class="icon-btn" type="button" data-toggle-side aria-label="Toggle menu">{% icon "menu" %}</button>
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="{% url 'cms_dashboard' %}">Home</a>{% block crumbs %}{% icon "chevron-right" %}<span>Dashboard</span>{% endblock %}
+      </nav>
+      <details class="usermenu">
+        <summary><span class="usermenu__avatar">{{ user.first_name|default:user.username|slice:":1"|upper }}</span><span class="usermenu__name">{{ user.get_full_name|default:user.username }}</span>{% icon "chevron-down" %}</summary>
+        <div class="usermenu__pop">
+          {% if user.is_superuser %}<a href="{% url 'cms_edit' 'users' user.pk %}">{% icon "user-round-pen" %}My account</a>{% endif %}
+          <form method="post" action="{% url 'cms_logout' %}">{% csrf_token %}<button type="submit">{% icon "log-out" %}Sign out</button></form>
+        </div>
+      </details>
+    </header>
+
+    <main class="content">
+      {% for msg in messages %}<div class="toast toast--{{ msg.tags }}" role="status">{% if msg.tags == 'error' %}{% icon "circle-alert" %}{% else %}{% icon "circle-check" %}{% endif %}{{ msg }}</div>{% endfor %}
+      {% block content %}{% endblock %}
+    </main>
+    <footer class="pfoot">&copy; {% now "Y" %} Kashvo</footer>
+  </div>
+</div>
+<script>
+  document.querySelector("[data-toggle-side]").addEventListener("click", () => document.getElementById("shell").classList.toggle("is-collapsed"));
+  setTimeout(() => document.querySelectorAll(".toast").forEach((t) => t.classList.add("is-gone")), 4000);
+</script>
+{% block scripts %}{% endblock %}
+</body>
+</html>

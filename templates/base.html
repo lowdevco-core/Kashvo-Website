@@ -1,0 +1,96 @@
+{% load static %}<!doctype html>
+<html lang="en-IN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{% firstof seo.meta_title seo.title as t %}{% if t %}{{ t }} · Kashvo{% else %}{% block default_title %}Kashvo · GST billing, POS & accounting for Indian shops{% endblock %}{% endif %}{% endblock %}</title>
+  <meta name="description" content="{% block description %}{{ seo.meta_description|default:'GST invoices, a fast counter POS with thermal receipts and UPI QR, and books that balance themselves. Billing software for retail, wholesale and service businesses in India.' }}{% endblock %}">
+  <meta name="keywords" content="{% block keywords %}{{ seo.meta_keywords|default:'GST billing software, POS software India, invoice software, accounting software for shops, GST invoice, thermal printer billing, UPI billing, inventory software, Kashvo' }}{% endblock %}">
+  <meta name="robots" content="{% if seo.noindex %}noindex, nofollow{% else %}index, follow, max-image-preview:large{% endif %}">
+  <meta name="author" content="Kashvo">
+  <meta name="theme-color" content="#0D9488">
+  <link rel="canonical" href="{{ SITE_URL }}{{ request.path }}">
+  <link rel="alternate" hreflang="en-IN" href="{{ SITE_URL }}{{ request.path }}">
+
+  <meta property="og:site_name" content="Kashvo">
+  <meta property="og:locale" content="en_IN">
+  <meta property="og:type" content="{% block og_type %}website{% endblock %}">
+  <meta property="og:url" content="{{ SITE_URL }}{{ request.path }}">
+  <meta property="og:title" content="{% firstof seo.meta_title seo.title 'Kashvo · GST billing & POS for Indian shops' %}">
+  <meta property="og:description" content="{{ seo.meta_description|default:'Bill faster at the counter. GST-ready invoices, POS, payments and reports in one place.' }}">
+  <meta property="og:image" content="{% block og_image %}{% if seo.og_image %}{{ SITE_URL }}{{ seo.og_image.url }}{% else %}{{ SITE_URL }}{% static 'img/og-image.png' %}{% endif %}{% endblock %}">
+  <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="{% static 'img/favicon.svg' %}" type="image/svg+xml">
+  <link rel="icon" href="{% static 'img/favicon.ico' %}" sizes="any">
+  <link rel="apple-touch-icon" href="{% static 'img/apple-touch-icon.png' %}">
+  <link rel="preload" href="{% static 'fonts/plus-jakarta-sans-latin-700-normal.woff2' %}" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="{% static 'css/site.css' %}">
+
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@graph":[
+    {"@type":"Organization","@id":"{{ SITE_URL }}/#org","name":"Kashvo","url":"{{ SITE_URL }}/","logo":"{{ SITE_URL }}{% static 'img/apple-touch-icon.png' %}","telephone":"{{ PHONE_LINK }}","contactPoint":{"@type":"ContactPoint","telephone":"{{ PHONE_LINK }}","contactType":"sales","areaServed":"IN","availableLanguage":["en","hi"]}},
+    {"@type":"WebSite","@id":"{{ SITE_URL }}/#site","url":"{{ SITE_URL }}/","name":"Kashvo","publisher":{"@id":"{{ SITE_URL }}/#org"},"inLanguage":"en-IN",
+     "potentialAction":{"@type":"SearchAction","target":"{{ SITE_URL }}/blog/?q={q}","query-input":"required name=q"}}
+  ]}
+  </script>
+  {% block schema %}{% endblock %}
+</head>
+<body class="page-{{ page_key|default:'x' }}">
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="top">
+    <div class="wrap top__row">
+      <a href="{% url 'home' %}" aria-label="Kashvo home"><img src="{% static 'img/kashvo-lockup.svg' %}" alt="Kashvo" width="138" height="41"></a>
+      <nav class="top__nav" id="nav" aria-label="Main">
+        <div class="top__links">
+          <a href="{% url 'about' %}" {% if page_key == 'about' %}aria-current="page"{% endif %}>About</a>
+          <a href="{% url 'why' %}" {% if page_key == 'why' %}aria-current="page"{% endif %}>Why Kashvo</a>
+          <a href="{% url 'pricing' %}" {% if page_key == 'pricing' %}aria-current="page"{% endif %}>Pricing</a>
+          <a href="{% url 'blog' %}" {% if page_key == 'blog' %}aria-current="page"{% endif %}>Blog</a>
+        </div>
+        <div class="top__cta">
+          <a class="btn btn--ghost" href="{{ APP_URL }}/login">Log in</a>
+          <a class="btn btn--primary" href="{{ APP_URL }}/signup">Start free</a>
+        </div>
+      </nav>
+      <button class="burger" aria-label="Menu" aria-controls="nav" aria-expanded="false">{% icon "menu" %}</button>
+    </div>
+  </header>
+
+  <main id="main">{% block content %}{% endblock %}</main>
+
+  {% block cta %}
+  <section class="cta {% block cta_class %}{% endblock %}">
+    <div class="wrap">
+      <div class="cta__box reveal">
+        <img src="{% static 'img/kashvo-lockup-white.svg' %}" alt="" width="150" height="44" loading="lazy">
+        <h2>Make your next bill on Kashvo.</h2>
+        <p>Free to start. No card needed. Set up in a few minutes.</p>
+        <a class="btn btn--white btn--lg" href="{{ APP_URL }}/signup">Start free {% icon "arrow-right" %}</a>
+      </div>
+    </div>
+  </section>
+  {% endblock %}
+
+  <footer class="foot">
+    <div class="wrap">
+      <div class="foot__grid">
+        <div>
+          <img src="{% static 'img/kashvo-lockup.svg' %}" alt="Kashvo" width="124" height="37" loading="lazy">
+          <p class="foot__tag">GST billing, POS and accounting for Indian retail, wholesale and service businesses.</p>
+        </div>
+        <nav aria-label="Product"><h3>Product</h3><a href="{% url 'why' %}">Why Kashvo</a><a href="{% url 'pricing' %}">Pricing</a><a href="{{ APP_URL }}/signup">Start free</a></nav>
+        <nav aria-label="Company"><h3>Company</h3><a href="{% url 'about' %}">About us</a><a href="{% url 'blog' %}">Blog</a></nav>
+        <nav aria-label="Contact"><h3>Contact</h3><a href="tel:{{ PHONE_LINK }}">{{ PHONE }}</a><a href="https://wa.me/{{ PHONE_LINK|slice:'1:' }}" target="_blank" rel="noopener">WhatsApp us</a><a href="{{ APP_URL }}/login">Log in</a></nav>
+      </div>
+      <div class="foot__legal"><p>&copy; {% now "Y" %} Kashvo. Made in India.</p><p>GST-ready billing for every counter.</p></div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" defer></script>
+  <script src="{% static 'js/site.js' %}" defer></script>
+</body>
+</html>

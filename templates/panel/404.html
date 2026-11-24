@@ -1,0 +1,14 @@
+{% extends "panel/base.html" %}
+{% block title %}Page not found{% endblock %}
+{% block crumbs %}{% icon "chevron-right" %}<span>404 Not Found</span>{% endblock %}
+{% block content %}
+<section class="box box--narrow confirm" style="margin:60px auto;padding:48px 24px">
+  <span class="module__icon module__icon--danger">{% icon "file-x" %}</span>
+  <h1>This CMS page doesn't exist</h1>
+  <p>The record, post, or module you requested could not be found. It may have been deleted, unpublished, or the URL might be mistyped.</p>
+  <div style="display:flex;gap:10px;justify-content:center;margin-top:16px;flex-wrap:wrap">
+    <a class="pbtn pbtn--primary" href="{% url 'cms_dashboard' %}">{% icon "layout-dashboard" %}Back to Dashboard</a>
+    <a class="pbtn" href="{% url 'cms_list' 'posts' %}">{% icon "newspaper" %}All blog posts</a>
+  </div>
+</section>
+{% endblock %}

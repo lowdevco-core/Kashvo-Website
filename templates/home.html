@@ -1,0 +1,150 @@
+{% extends "base.html" %}{% load static %}
+{% block schema %}
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Kashvo","applicationCategory":"BusinessApplication","operatingSystem":"Web",
+ "description":"GST billing, POS and accounting software for Indian retail, wholesale and service businesses.","url":"{{ SITE_URL }}/",
+ "offers":{"@type":"Offer","price":"0","priceCurrency":"INR"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Does it work with my thermal printer?","acceptedAnswer":{"@type":"Answer","text":"Receipts are laid out for 58 mm and 80 mm paper and print through your browser, so any thermal printer Windows or Android can print to will work."}},
+{"@type":"Question","name":"Is it GST ready?","acceptedAnswer":{"@type":"Answer","text":"Yes. Invoices carry GSTINs, HSN codes and the right split of CGST, SGST or IGST, and the GST reports give you GSTR-1 and GSTR-3B summaries."}},
+{"@type":"Question","name":"Do I need to know accounting?","acceptedAnswer":{"@type":"Answer","text":"No. Every bill and payment posts its own entries, so your books balance without double entry."}}]}
+</script>
+{% endblock %}
+{% block cta_class %}cta--tint{% endblock %}
+{% block content %}
+<section class="hero">
+  <div class="wrap hero__grid">
+    <div>
+      <span class="eyebrow">Billing &amp; POS for Indian shops</span>
+      <h1><span class="line"><span>Billing that keeps up</span></span><span class="line"><span>with your counter.</span></span></h1>
+      <p class="lead">GST invoices in seconds, a POS that prints on your thermal printer and shows a UPI QR, and books that balance themselves. Made for retail, wholesale and service businesses.</p>
+      <div class="hero__actions">
+        <a class="btn btn--primary btn--lg" href="{{ APP_URL }}/signup">Start free</a>
+        <a class="btn btn--light btn--lg" href="#features">See what's inside</a>
+      </div>
+      <ul class="ticks">
+        <li>{% icon "circle-check" %}CGST, SGST &amp; IGST worked out for you</li>
+        <li>{% icon "circle-check" %}58 mm &amp; 80 mm receipts</li>
+        <li>{% icon "circle-check" %}Works on any PC or phone browser</li>
+      </ul>
+    </div>
+    <figure class="receipt" aria-label="A sample Kashvo receipt">
+      <div class="receipt__head"><img src="{% static 'img/kashvo-symbol.svg' %}" alt="" width="34" height="34"><div><strong>Sharma General Store</strong><span>GSTIN 32ABCDE1234F1Z5</span></div></div>
+      <dl><div><dt>Bill</dt><dd>INV-0142</dd></div><div><dt>Date</dt><dd>5 Nov 2026, 10:42 am</dd></div></dl>
+      <table>
+        <thead><tr><th>Item</th><th>Qty</th><th>Amount</th></tr></thead>
+        <tbody>
+          <tr><td>Basmati rice 5 kg</td><td>2</td><td>₹1,180.00</td></tr>
+          <tr><td>Sunflower oil 1 L</td><td>3</td><td>₹474.00</td></tr>
+          <tr><td>Tea 250 g</td><td>1</td><td>₹145.00</td></tr>
+        </tbody>
+      </table>
+      <dl><div><dt>Taxable</dt><dd>₹1,692.38</dd></div><div><dt>GST</dt><dd>₹106.62</dd></div><div class="receipt__total"><dt>Total</dt><dd>₹1,799.00</dd></div></dl>
+      <div class="receipt__pay"><span class="qr"></span><span>Scan to pay with any UPI app<strong>Paid · UPI</strong></span></div>
+    </figure>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap grid grid--3 stagger">
+    <article class="card"><div class="card__icon">{% icon "shopping-cart" %}</div><h3>Retail</h3><p>Scan a barcode, the item's on the bill. Walk-in sales need no customer name, and the receipt prints the moment it's paid.</p></article>
+    <article class="card"><div class="card__icon">{% icon "package" %}</div><h3>Wholesale</h3><p>Wholesale prices switch on at the quantity you set. Credit limits warn you before a party owes too much, and estimates turn into invoices in one click.</p></article>
+    <article class="card"><div class="card__icon">{% icon "wrench" %}</div><h3>Services</h3><p>Bill services and digital products without stock getting in the way. Track who has paid, who hasn't, and settle payments against the right invoices.</p></article>
+  </div>
+</section>
+
+<section class="section" id="features">
+  <div class="wrap">
+    <div class="section-head reveal"><span class="eyebrow">Everything at the counter and in the back office</span><h2>One app for the whole day's money.</h2></div>
+    <div class="grid grid--3 features stagger">
+      <div class="feature"><div class="feature__icon">{% icon "file-text" %}</div><h3>GST invoices</h3><p>Sale and purchase bills, estimates, orders, delivery challans and returns. Tax splits into CGST and SGST, or IGST across states, automatically.</p></div>
+      <div class="feature"><div class="feature__icon">{% icon "scan-barcode" %}</div><h3>Fast POS</h3><p>A full-screen billing counter with barcode scanning, discounts, and cash, bank or UPI payments. Prints on 58 mm and 80 mm thermal printers.</p></div>
+      <div class="feature"><div class="feature__icon">{% icon "arrow-left-right" %}</div><h3>Payments &amp; dues</h3><p>Record payments in and out, pick which invoices they settle, and see every party's balance and statement at a glance.</p></div>
+      <div class="feature"><div class="feature__icon">{% icon "boxes" %}</div><h3>Items &amp; stock</h3><p>Stock that updates with every bill, low-stock alerts, wholesale prices, promotions and printable barcode labels.</p></div>
+      <div class="feature"><div class="feature__icon">{% icon "book-open" %}</div><h3>Books that balance</h3><p>Cash book, ledgers, journal, trial balance, profit &amp; loss and balance sheet. No double entry to learn.</p></div>
+      <div class="feature"><div class="feature__icon">{% icon "file-down" %}</div><h3>Reports as PDF</h3><p>GSTR-1 and GSTR-3B summaries and every report ready to share as a clean PDF, for any dates you choose.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--tint">
+  <div class="wrap">
+    <div class="split">
+      <div>
+        <span class="eyebrow">Point of sale</span>
+        <h2>Bill the queue, not the paperwork.</h2>
+        <ul class="list">
+          <li>{% icon "check" %}<span><strong>Scan or type.</strong> Barcodes add the item; typing finds it by name or code.</span></li>
+          <li>{% icon "check" %}<span><strong>UPI that waits.</strong> Shows your UPI QR and only saves and prints once you confirm the money arrived.</span></li>
+          <li>{% icon "check" %}<span><strong>Thermal receipts.</strong> Sized for 58 mm and 80 mm counter printers, or A4 when you need it.</span></li>
+          <li>{% icon "check" %}<span><strong>Keyboard first.</strong> F1 to F8 jump to search, quantity, discount and payment.</span></li>
+        </ul>
+      </div>
+      <div class="panel" aria-hidden="true">
+        <div class="panel__row"><span>Scan barcode</span><kbd>8901234567890</kbd></div>
+        <div class="panel__row"><span>Tea 250 g</span><span>₹145.00</span></div>
+        <div class="panel__row"><span>Sunflower oil 1 L × 3</span><span>₹474.00</span></div>
+        <div class="panel__row panel__row--total"><span>To pay</span><span>₹619.00</span></div>
+        <div class="panel__btns"><span>Cash</span><span class="on">UPI</span><span>Bank</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap split split--rev">
+    <div>
+      <span class="eyebrow">Books &amp; GST</span>
+      <h2>Your accountant will thank you.</h2>
+      <p class="lead">Every bill, payment and expense posts its own entries, so the cash book, ledgers, trial balance and balance sheet always agree. Close the financial year when you're done, and it stays locked.</p>
+      <ul class="list">
+        <li>{% icon "check" %}<span><strong>Import in minutes.</strong> Bring items and parties over from Excel or CSV.</span></li>
+        <li>{% icon "check" %}<span><strong>Bulk updates.</strong> Change prices or tax for many items at once.</span></li>
+        <li>{% icon "check" %}<span><strong>Your data, yours.</strong> Download a full backup whenever you like.</span></li>
+      </ul>
+    </div>
+    <div class="stats stagger">
+      <div class="stat"><b data-count="13">13</b><span>kinds of document</span></div>
+      <div class="stat"><b data-count="10" data-suffix="+">10+</b><span>reports, all as PDF</span></div>
+      <div class="stat"><b>2</b><span>receipt widths: 58 &amp; 80 mm</span></div>
+      <div class="stat"><b>0</b><span>double entry to learn</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--tint">
+  <div class="wrap">
+    <div class="section-head reveal"><span class="eyebrow">Security</span><h2>Safe by default.</h2></div>
+    <div class="grid grid--3 stagger">
+      <article class="card"><div class="card__icon">{% icon "shield-check" %}</div><h3>Your business, walled off</h3><p>Every business's data is kept apart from every other. Each person sees only the businesses they belong to.</p></article>
+      <article class="card"><div class="card__icon">{% icon "key-round" %}</div><h3>Sign-ins you control</h3><p>Change your password and every other device is signed out at once, and you get an email about it.</p></article>
+      <article class="card"><div class="card__icon">{% icon "hard-drive-download" %}</div><h3>Built for the long run</h3><p>Encrypted connections, limits on password guessing, and backups you can download any time.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head reveal"><span class="eyebrow">Getting started</span><h2>Billing in three steps.</h2></div>
+    <ol class="steps stagger">
+      <li><b>Sign up</b><span>Your email and a password. Add your business name and GSTIN.</span></li>
+      <li><b>Add items</b><span>Type them in, or import your list from Excel.</span></li>
+      <li><b>Bill</b><span>Make your first invoice or open the POS. That's it.</span></li>
+    </ol>
+  </div>
+</section>
+
+<section class="section section--tint">
+  <div class="wrap">
+    <div class="section-head section-head--center reveal"><span class="eyebrow">FAQ</span><h2>Questions shops ask.</h2></div>
+    <div class="faq stagger">
+      <details><summary>Does it work with my thermal printer?{% icon "plus" %}</summary><p>Receipts are laid out for 58 mm and 80 mm paper and print through your browser, so any thermal printer Windows or Android can print to will work.</p></details>
+      <details><summary>Is it GST ready?{% icon "plus" %}</summary><p>Yes. Invoices carry GSTINs, HSN codes and the right split of CGST, SGST or IGST, prices can include or exclude tax, and the GST reports give you GSTR-1 and GSTR-3B summaries.</p></details>
+      <details><summary>Do I need to know accounting?{% icon "plus" %}</summary><p>No. Every bill and payment posts its own entries, so your books balance without you learning double entry.</p></details>
+      <details><summary>Can I bring my existing data?{% icon "plus" %}</summary><p>Yes. Import items and parties from Excel or CSV in a few minutes.</p></details>
+    </div>
+  </div>
+</section>
+{% endblock %}

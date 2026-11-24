@@ -1,0 +1,55 @@
+{% extends "panel/base.html" %}
+{% block title %}{{ m.label }}{% endblock %}
+{% block crumbs %}{% icon "chevron-right" %}<span>{{ m.label }}</span>{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div><h1>{{ m.label }}</h1><p>{{ page.paginator.count }} total</p></div>
+  <a class="pbtn pbtn--primary" href="{% url 'cms_add' key %}">{% icon "plus" %}Add {{ m.one }}</a>
+</div>
+
+<section class="box">
+  <form class="toolbar" method="get">
+    <label class="field-search">{% icon "search" %}<input type="search" name="q" value="{{ q }}" placeholder="Search {{ m.label|lower }}"></label>
+    {% if m.filters %}
+    <div class="segmented">
+      <a href="?q={{ q|urlencode }}" {% if not status %}class="is-on"{% endif %}>All</a>
+      {% for val, lab in m.filters.1 %}<a href="?status={{ val }}&q={{ q|urlencode }}" {% if status == val %}class="is-on"{% endif %}>{{ lab }}</a>{% endfor %}
+    </div>
+    {% endif %}
+  </form>
+
+  {% if rows %}
+  <div class="table-wrap">
+  <table class="table">
+    <thead><tr>{% for f, lab in m.cols %}<th>{{ lab }}</th>{% endfor %}<th></th></tr></thead>
+    <tbody>
+      {% for obj, cells in rows %}
+      <tr>
+        {% for c in cells %}
+        <td>{% if forloop.first %}<a class="strong" href="{% url 'cms_edit' key obj.pk %}">{{ c }}</a>
+          {% elif c is True %}<span class="pill pill--published">Yes</span>{% elif c is False %}<span class="muted">No</span>
+          {% elif c.year %}{{ c|date:"j M Y" }}{% elif c == "Published" or c == "Draft" %}<span class="pill pill--{{ c|lower }}">{{ c }}</span>
+          {% else %}{{ c|default:"-" }}{% endif %}</td>
+        {% endfor %}
+        <td class="actions">
+          {% if obj.get_absolute_url and key == 'posts' %}<a class="icon-btn" href="{{ obj.get_absolute_url }}" target="_blank" aria-label="View">{% icon "eye" %}</a>{% endif %}
+          <a class="icon-btn" href="{% url 'cms_edit' key obj.pk %}" aria-label="Edit">{% icon "pencil" %}</a>
+          <a class="icon-btn icon-btn--danger" href="{% url 'cms_delete' key obj.pk %}" aria-label="Delete">{% icon "trash-2" %}</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  </div>
+  {% if page.has_other_pages %}
+  <div class="pager">
+    {% if page.has_previous %}<a class="pbtn" href="?page={{ page.previous_page_number }}&q={{ q|urlencode }}&status={{ status }}">{% icon "arrow-left" %}Previous</a>{% endif %}
+    <span>Page {{ page.number }} of {{ page.paginator.num_pages }}</span>
+    {% if page.has_next %}<a class="pbtn" href="?page={{ page.next_page_number }}&q={{ q|urlencode }}&status={{ status }}">Next{% icon "arrow-right" %}</a>{% endif %}
+  </div>
+  {% endif %}
+  {% else %}
+  <div class="empty"><span class="module__icon">{% icon m.icon %}</span><p>{% if q %}Nothing matches “{{ q }}”.{% else %}No {{ m.label|lower }} yet.{% endif %}</p><a class="pbtn pbtn--primary" href="{% url 'cms_add' key %}">{% icon "plus" %}Add {{ m.one }}</a></div>
+  {% endif %}
+</section>
+{% endblock %}

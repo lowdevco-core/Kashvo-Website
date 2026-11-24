@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block default_title %}Pricing · Kashvo GST billing &amp; POS software{% endblock %}
+{% block description %}{{ seo.meta_description|default:"Kashvo pricing: start free, then Standard at ₹499 a month or Business at ₹1,499 a month. No setup fee." }}{% endblock %}
+{% block keywords %}{{ seo.meta_keywords|default:"billing software price, GST software cost, POS software price India, free billing software, Kashvo pricing" }}{% endblock %}
+{% block content %}
+<section class="phero phero--center">
+  <div class="wrap">
+    <span class="eyebrow">Pricing</span>
+    <h1>Simple plans that grow with you.</h1>
+    <p class="lead">Start free. Upgrade when more people need to bill. Prices are per month, before GST.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="plans stagger">
+      <div class="plan">
+        <div class="plan__top"><h3>Free</h3></div>
+        <div class="plan__price">₹0<small> / month</small></div>
+        <p class="plan__note">For a single counter getting started.</p>
+        <ul class="list"><li>{% icon "check" %}Up to 3 people</li><li>{% icon "check" %}GST invoices and POS</li><li>{% icon "check" %}Thermal and A4 printing</li><li>{% icon "check" %}Cash book and reports</li></ul>
+        <a class="btn btn--light btn--lg" href="{{ APP_URL }}/signup">Start free</a>
+      </div>
+      <div class="plan plan--pop">
+        <div class="plan__top"><h3>Standard</h3><span class="plan__badge">Most popular</span></div>
+        <div class="plan__price">₹499<small> / month</small></div>
+        <p class="plan__note">For busy shops with a team.</p>
+        <ul class="list"><li>{% icon "check" %}Up to 15 people</li><li>{% icon "check" %}Everything in Free</li></ul>
+        <a class="btn btn--primary btn--lg" href="{{ APP_URL }}/signup">Choose Standard</a>
+      </div>
+      <div class="plan">
+        <div class="plan__top"><h3>Business</h3></div>
+        <div class="plan__price">₹1,499<small> / month</small></div>
+        <p class="plan__note">For wholesalers and growing teams.</p>
+        <ul class="list"><li>{% icon "check" %}Unlimited people</li><li>{% icon "check" %}Everything in Standard</li></ul>
+        <a class="btn btn--light btn--lg" href="{{ APP_URL }}/signup">Choose Business</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--tint">
+  <div class="wrap">
+    <div class="section-head section-head--center reveal"><span class="eyebrow">Pricing FAQ</span><h2>Good to know.</h2></div>
+    <div class="faq stagger">
+      <details><summary>Is the Free plan really free?{% icon "plus" %}</summary><p>Yes. No card needed and no time limit. Upgrade only when you need more people.</p></details>
+      <details><summary>How do I pay?{% icon "plus" %}</summary><p>Online, month by month, from inside the app.</p></details>
+      <details><summary>Can I change plans later?{% icon "plus" %}</summary><p>Yes. Move up or down whenever your team changes.</p></details>
+    </div>
+  </div>
+</section>
+{% endblock %}
+{% block cta_class %}cta--tint{% endblock %}

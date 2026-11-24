@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block default_title %}{% if category %}{{ category }} · Kashvo Blog{% else %}Blog · GST, billing & shop tips · Kashvo{% endif %}{% endblock %}
+{% block description %}{{ seo.meta_description|default:"Practical guides on GST, billing, POS, inventory and running a profitable shop in India, from the Kashvo team." }}{% endblock %}
+{% block keywords %}{{ seo.meta_keywords|default:"GST guide, billing tips, retail shop tips India, GST invoice format, small business accounting India" }}{% endblock %}
+{% block content %}
+<section class="phero">
+  <div class="wrap">
+    <span class="eyebrow">Kashvo Blog</span>
+    <h1>{% if category %}{{ category }}{% else %}Run a sharper shop.{% endif %}</h1>
+    <p class="lead">GST explained simply, billing tips, and ideas to help your counter move faster.</p>
+  </div>
+</section>
+<section class="section" style="padding-top:56px">
+  <div class="wrap">
+    <div class="blog-bar">
+      <nav class="cats" aria-label="Categories">
+        <a href="{% url 'blog' %}" {% if not category %}aria-current="page"{% endif %}>All</a>
+        {% for c in categories %}<a href="{{ c.get_absolute_url }}" {% if c == category %}aria-current="page"{% endif %}>{{ c }}</a>{% endfor %}
+      </nav>
+      <form class="search" role="search" action="{% url 'blog' %}">{% icon "search" %}<input type="search" name="q" value="{{ q }}" placeholder="Search articles" aria-label="Search articles"></form>
+    </div>
+    {% if featured %}{% include "blog/_card.html" with post=featured big=True extra="featured reveal" %}{% endif %}
+    {% if page_obj.object_list %}
+    <div class="grid grid--3 stagger">{% for post in page_obj %}{% if post != featured %}{% include "blog/_card.html" %}{% endif %}{% endfor %}</div>
+    {% else %}<p class="empty">{% if q %}No articles match “{{ q }}”.{% else %}No articles yet. Check back soon.{% endif %}</p>{% endif %}
+    {% if page_obj.has_other_pages %}
+    <nav class="pager" aria-label="Pages">
+      {% if page_obj.has_previous %}<a class="btn btn--light" rel="prev" href="?page={{ page_obj.previous_page_number }}{% if q %}&q={{ q|urlencode }}{% endif %}">{% icon "arrow-left" %} Newer</a>{% endif %}
+      <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+      {% if page_obj.has_next %}<a class="btn btn--light" rel="next" href="?page={{ page_obj.next_page_number }}{% if q %}&q={{ q|urlencode }}{% endif %}">Older {% icon "arrow-right" %}</a>{% endif %}
+    </nav>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

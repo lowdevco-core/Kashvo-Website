@@ -1,0 +1,37 @@
+{% extends "panel/base.html" %}
+{% block content %}
+<div class="page-head">
+  <div><h1>Dashboard</h1><p>Welcome back, {{ user.first_name|default:user.username }}.</p></div>
+  <a class="pbtn pbtn--primary" href="{% url 'cms_add' 'posts' %}">{% icon "plus" %}New post</a>
+</div>
+
+<div class="modules">
+  {% for key, label, count, ic in cards %}
+  <a class="module {% if forloop.first %}module--lead{% endif %}" href="{% url 'cms_list' key %}{% if label == 'Published' %}?status=published{% elif label == 'Drafts' %}?status=draft{% endif %}">
+    <span class="module__icon">{% icon ic %}</span>
+    <span class="module__label">{{ label }}</span>
+    <span class="module__count">{{ count }}</span>
+  </a>
+  {% endfor %}
+</div>
+
+<section class="box">
+  <div class="box__head"><h2>Recently edited</h2><a href="{% url 'cms_list' 'posts' %}">All posts {% icon "arrow-right" %}</a></div>
+  {% if recent %}
+  <table class="table">
+    <thead><tr><th>Title</th><th>Status</th><th>Category</th><th>Updated</th><th></th></tr></thead>
+    <tbody>
+      {% for p in recent %}
+      <tr>
+        <td><a class="strong" href="{% url 'cms_edit' 'posts' p.pk %}">{{ p.title }}</a><small>/blog/{{ p.slug }}/</small></td>
+        <td><span class="pill pill--{{ p.status }}">{{ p.get_status_display }}</span></td>
+        <td>{{ p.category|default:"-" }}</td>
+        <td>{{ p.updated_at|date:"j M Y, g:i a" }}</td>
+        <td class="actions"><a class="icon-btn" href="{{ p.get_absolute_url }}" target="_blank" aria-label="View">{% icon "eye" %}</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}<p class="empty">No posts yet. <a href="{% url 'cms_add' 'posts' %}">Write the first one</a>.</p>{% endif %}
+</section>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% load static %}<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex, nofollow">
+  <title>Sign in · Kashvo CMS</title>
+  <link rel="icon" href="{% static 'img/favicon.svg' %}" type="image/svg+xml">
+  <link rel="stylesheet" href="{% static 'css/panel.css' %}">
+</head>
+<body class="auth">
+  <main class="auth__card">
+    <img src="{% static 'img/kashvo-lockup.svg' %}" alt="Kashvo" width="138" height="41">
+    <h1>Sign in to the CMS</h1>
+    <p>Manage the blog and website content.</p>
+    <form method="post">{% csrf_token %}
+      {% if form.non_field_errors %}<div class="toast toast--error">{% icon "circle-alert" %}{{ form.non_field_errors|join:" " }}</div>{% endif %}
+      <div class="field"><label for="id_username">Username</label><input id="id_username" name="username" autocomplete="username" autofocus required value="{{ form.username.value|default:'' }}"></div>
+      <div class="field"><label for="id_password">Password</label><input id="id_password" type="password" name="password" autocomplete="current-password" required></div>
+      <input type="hidden" name="next" value="{{ next }}">
+      <button class="pbtn pbtn--primary pbtn--block" type="submit">Sign in{% icon "arrow-right" %}</button>
+    </form>
+    <a class="auth__back" href="{% url 'home' %}">{% icon "arrow-left" %}Back to website</a>
+  </main>
+</body>
+</html>

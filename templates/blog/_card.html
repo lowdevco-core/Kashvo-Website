@@ -1,0 +1,8 @@
+{% load static %}<a class="card post-card {{ extra }}" href="{{ post.get_absolute_url }}">
+  <div class="post-card__img">{% if post.cover %}<img src="{{ post.cover.url }}" alt="{{ post.cover_alt|default:post.title }}" loading="lazy">{% else %}<img class="mark" src="{% static 'img/kashvo-symbol.svg' %}" alt="">{% endif %}</div>
+  <div class="post-card__body">
+    <div class="meta">{% if post.category %}<span class="tag">{{ post.category }}</span><i></i>{% endif %}<time datetime="{{ post.published_at|date:'c' }}">{{ post.published_at|date:"j M Y" }}</time><i></i><span>{{ post.read_minutes }} min read</span></div>
+    {% if big %}<h2>{{ post.title }}</h2>{% else %}<h3>{{ post.title }}</h3>{% endif %}
+    <p>{{ post.summary }}</p>
+  </div>
+</a>

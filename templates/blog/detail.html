@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block description %}{{ post.meta_description|default:post.summary|truncatechars:160 }}{% endblock %}
+{% block keywords %}{{ post.meta_keywords|default:"GST, billing software, Kashvo" }}{% endblock %}
+{% block og_type %}article{% endblock %}
+{% block og_image %}{% if post.og_image %}{{ SITE_URL }}{{ post.og_image.url }}{% elif post.cover %}{{ SITE_URL }}{{ post.cover.url }}{% else %}{{ block.super }}{% endif %}{% endblock %}
+{% block schema %}
+<meta property="article:published_time" content="{{ post.published_at|date:'c' }}">
+<meta property="article:modified_time" content="{{ post.updated_at|date:'c' }}">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+ {"@type":"BlogPosting","headline":"{{ post.title|escapejs }}","description":"{{ post.summary|escapejs }}",
+  "datePublished":"{{ post.published_at|date:'c' }}","dateModified":"{{ post.updated_at|date:'c' }}",
+  "mainEntityOfPage":"{{ SITE_URL }}{{ post.get_absolute_url }}",
+  {% if post.cover %}"image":"{{ SITE_URL }}{{ post.cover.url }}",{% endif %}
+  "author":{"@type":"Person","name":"{{ post.author_name|escapejs }}"},
+  "publisher":{"@id":"{{ SITE_URL }}/#org"},"keywords":"{{ post.meta_keywords|escapejs }}"},
+ {"@type":"BreadcrumbList","itemListElement":[
+  {"@type":"ListItem","position":1,"name":"Home","item":"{{ SITE_URL }}/"},
+  {"@type":"ListItem","position":2,"name":"Blog","item":"{{ SITE_URL }}/blog/"},
+  {"@type":"ListItem","position":3,"name":"{{ post.title|escapejs }}"}]}
+]}
+</script>
+{% endblock %}
+{% block content %}
+<article>
+  <header class="article-head">
+    <div class="narrow">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="{% url 'blog' %}">Blog</a>{% if post.category %}{% icon "chevron-right" %}<a href="{{ post.category.get_absolute_url }}">{{ post.category }}</a>{% endif %}</nav>
+      {% if post.status != "published" %}<span class="eyebrow">Draft preview</span>{% endif %}
+      <h1>{{ post.title }}</h1>
+      <div class="meta"><span>{{ post.author_name }}</span><i></i><time datetime="{{ post.published_at|date:'c' }}">{{ post.published_at|date:"j F Y" }}</time><i></i><span>{{ post.read_minutes }} min read</span></div>
+    </div>
+  </header>
+  {% if post.cover %}<div class="narrow"><figure class="article-cover"><img src="{{ post.cover.url }}" alt="{{ post.cover_alt|default:post.title }}" width="1200" height="675"></figure></div>{% endif %}
+  <div class="narrow">
+    <div class="prose">{{ post.body|safe }}</div>
+    <div class="article-foot">
+      <div class="tags">{% for t in post.tags.all %}<span>{{ t }}</span>{% endfor %}</div>
+      <div class="share">Share
+        <a target="_blank" rel="noopener" aria-label="Share on WhatsApp" href="https://wa.me/?text={{ post.title|urlencode }}%20{{ SITE_URL|urlencode }}{{ post.get_absolute_url|urlencode }}">{% icon "message-circle" %}</a>
+        <a target="_blank" rel="noopener" aria-label="Share by email" href="mailto:?subject={{ post.title|urlencode }}&body={{ SITE_URL|urlencode }}{{ post.get_absolute_url|urlencode }}">{% icon "mail" %}</a>
+        <button class="btn btn--light" type="button" data-copy="{{ SITE_URL }}{{ post.get_absolute_url }}" aria-label="Copy link" style="width:38px;height:38px;padding:0">{% icon "link" %}</button>
+      </div>
+    </div>
+  </div>
+</article>
+{% if related %}
+<section class="section section--tint">
+  <div class="wrap"><div class="section-head reveal"><h2>Keep reading</h2></div><div class="grid grid--3 stagger">{% for post in related %}{% include "blog/_card.html" %}{% endfor %}</div></div>
+</section>
+{% endif %}
+{% endblock %}
