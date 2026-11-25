@@ -7,11 +7,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = config("SECRET_KEY")
 DEBUG = config("DEBUG", default=False, cast=bool)
-ALLOWED_HOSTS = config("ALLOWED_HOSTS", default="localhost,127.0.0.1", cast=Csv())
-CSRF_TRUSTED_ORIGINS = config("CSRF_TRUSTED_ORIGINS", default="", cast=Csv())
+ALLOWED_HOSTS = config("ALLOWED_HOSTS", default="kashvo.in,www.kashvo.in,localhost,127.0.0.1", cast=Csv())
+CSRF_TRUSTED_ORIGINS = config("CSRF_TRUSTED_ORIGINS", default="https://kashvo.in,https://www.kashvo.in", cast=Csv())
 
 SITE_URL = config("SITE_URL", default="https://kashvo.in")
-APP_URL = config("APP_URL", default="/app")  # placeholder until the app is live
+APP_URL = config("APP_URL", default="https://app.kashvo.in")
 PHONE = config("PHONE", default="+91 85906 42039")
 PHONE_LINK = "+" + "".join(c for c in PHONE if c.isdigit())
 

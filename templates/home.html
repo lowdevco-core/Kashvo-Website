@@ -3,7 +3,7 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Kashvo","applicationCategory":"BusinessApplication","operatingSystem":"Web",
  "description":"GST billing, POS and accounting software for Indian retail, wholesale and service businesses.","url":"{{ SITE_URL }}/",
- "offers":{"@type":"Offer","price":"0","priceCurrency":"INR"}}
+ "offers":[{"@type":"Offer","name":"Monthly","price":"999","priceCurrency":"INR"},{"@type":"Offer","name":"Yearly","price":"9999","priceCurrency":"INR"}]}
 </script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
@@ -21,7 +21,7 @@
       <h1><span class="line"><span>Billing that keeps up</span></span><span class="line"><span>with your counter.</span></span></h1>
       <p class="lead">GST invoices in seconds, a POS that prints on your thermal printer and shows a UPI QR, and books that balance themselves. Made for retail, wholesale and service businesses.</p>
       <div class="hero__actions">
-        <a class="btn btn--primary btn--lg" href="{{ APP_URL }}/signup">Start free</a>
+        <a class="btn btn--primary btn--lg" href="{{ APP_URL }}/signup">Start free trial</a>
         <a class="btn btn--light btn--lg" href="#features">See what's inside</a>
       </div>
       <ul class="ticks">
@@ -66,6 +66,7 @@
       <div class="feature"><div class="feature__icon">{% icon "book-open" %}</div><h3>Books that balance</h3><p>Cash book, ledgers, journal, trial balance, profit &amp; loss and balance sheet. No double entry to learn.</p></div>
       <div class="feature"><div class="feature__icon">{% icon "file-down" %}</div><h3>Reports as PDF</h3><p>GSTR-1 and GSTR-3B summaries and every report ready to share as a clean PDF, for any dates you choose.</p></div>
     </div>
+    <p class="also">Also inside: HRM, supply chain and owner insights.</p>
   </div>
 </section>
 

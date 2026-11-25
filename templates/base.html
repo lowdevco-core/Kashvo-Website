@@ -52,7 +52,7 @@
         </div>
         <div class="top__cta">
           <a class="btn btn--ghost" href="{{ APP_URL }}/login">Log in</a>
-          <a class="btn btn--primary" href="{{ APP_URL }}/signup">Start free</a>
+          <a class="btn btn--primary" href="{{ APP_URL }}/signup">Start free trial</a>
         </div>
       </nav>
       <button class="burger" aria-label="Menu" aria-controls="nav" aria-expanded="false">{% icon "menu" %}</button>
@@ -67,8 +67,8 @@
       <div class="cta__box reveal">
         <img src="{% static 'img/kashvo-lockup-white.svg' %}" alt="" width="150" height="44" loading="lazy">
         <h2>Make your next bill on Kashvo.</h2>
-        <p>Free to start. No card needed. Set up in a few minutes.</p>
-        <a class="btn btn--white btn--lg" href="{{ APP_URL }}/signup">Start free {% icon "arrow-right" %}</a>
+        <p>Try it free for 7 days. Set up in a few minutes.</p>
+        <a class="btn btn--white btn--lg" href="{{ APP_URL }}/signup">Start free trial {% icon "arrow-right" %}</a>
       </div>
     </div>
   </section>
@@ -81,7 +81,7 @@
           <img src="{% static 'img/kashvo-lockup.svg' %}" alt="Kashvo" width="124" height="37" loading="lazy">
           <p class="foot__tag">GST billing, POS and accounting for Indian retail, wholesale and service businesses.</p>
         </div>
-        <nav aria-label="Product"><h3>Product</h3><a href="{% url 'why' %}">Why Kashvo</a><a href="{% url 'pricing' %}">Pricing</a><a href="{{ APP_URL }}/signup">Start free</a></nav>
+        <nav aria-label="Product"><h3>Product</h3><a href="{% url 'why' %}">Why Kashvo</a><a href="{% url 'pricing' %}">Pricing</a><a href="{{ APP_URL }}/signup">Start free trial</a></nav>
         <nav aria-label="Company"><h3>Company</h3><a href="{% url 'about' %}">About us</a><a href="{% url 'blog' %}">Blog</a></nav>
         <nav aria-label="Contact"><h3>Contact</h3><a href="tel:{{ PHONE_LINK }}">{{ PHONE }}</a><a href="https://wa.me/{{ PHONE_LINK|slice:'1:' }}" target="_blank" rel="noopener">WhatsApp us</a><a href="{{ APP_URL }}/login">Log in</a></nav>
       </div>

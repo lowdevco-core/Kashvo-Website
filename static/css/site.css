@@ -108,6 +108,7 @@ p { margin: 0 0 1em; }
 .card:hover { border-color: #cfe3df; }
 .card p, .feature p { color: var(--muted); margin: 0; }
 .features { gap: 44px 36px; }
+.also { margin: 40px 0 0; color: var(--muted); font-size: 15px; }
 .feature__icon, .card__icon { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 12px; background: var(--brand-soft); color: var(--brand); margin-bottom: 16px; }
 .feature__icon .icon, .card__icon .icon { width: 22px; height: 22px; }
 
@@ -165,6 +166,7 @@ p { margin: 0 0 1em; }
 
 /* pricing */
 .plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.plans--2 { grid-template-columns: repeat(2, 1fr); max-width: 760px; margin-inline: auto; }
 .plan { display: flex; flex-direction: column; background: #fff; border: 1px solid var(--line); border-radius: 20px; padding: 30px; box-shadow: var(--shadow); }
 .plan--pop { border-color: var(--brand); box-shadow: 0 0 0 1px var(--brand), 0 24px 48px rgb(15 118 110 / .14); }
 .plan__top { display: flex; justify-content: space-between; align-items: center; }
