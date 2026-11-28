@@ -4,10 +4,30 @@
 {% block keywords %}{{ seo.meta_keywords|default:"best billing software India, billing software comparison, GST software alternative, POS and accounting software, Kashvo" }}{% endblock %}
 {% block content %}
 <section class="phero">
-  <div class="wrap">
-    <span class="eyebrow">Why Kashvo</span>
-    <h1>One app where most shops use three.</h1>
-    <p class="lead">A billing app for invoices, a POS for the counter, accounting software for the books. Kashvo is all three, so the numbers never need to be matched up at month end.</p>
+  <div class="wrap phero__grid">
+    <div>
+      <span class="eyebrow">Why Kashvo</span>
+      <h1>One app where most shops use three.</h1>
+      <p class="lead">A billing app for invoices, a POS for the counter, accounting software for the books. Kashvo is all three, so the numbers never need to be matched up at month end.</p>
+    </div>
+    <div class="versus reveal" aria-hidden="true">
+      <div class="versus__box versus__box--old">
+        <span class="versus__label">Typical shop setup</span>
+        <ul>
+          <li><span>Billing app + Excel + Tally</span><em class="warn">3 logins</em></li>
+          <li><span>End-of-month stock check</span><em class="warn">4 mismatches</em></li>
+          <li><span>UPI vs bank statement</span><em class="warn">Manual</em></li>
+        </ul>
+      </div>
+      <div class="versus__box versus__box--new">
+        <span class="versus__label">With Kashvo</span>
+        <ul>
+          <li><span>POS, GST, Books &amp; HRM</span><em class="ok">{% icon "check" %} 1 app</em></li>
+          <li><span>Every bill posts its own entry</span><em class="ok">{% icon "check" %} Synced</em></li>
+          <li><span>UPI QR confirmation</span><em class="ok">{% icon "check" %} Verified</em></li>
+        </ul>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -38,6 +58,7 @@
           <tr><td>58 mm / 80 mm thermal receipts</td><td class="us yes">{% icon "check" %}</td><td class="part">Needs setup</td><td class="yes">{% icon "check" %}</td></tr>
           <tr><td>UPI QR with payment confirmation</td><td class="us yes">{% icon "check" %}</td><td class="no">{% icon "minus" %}</td><td class="part">QR only</td></tr>
           <tr><td>Books balance automatically</td><td class="us yes">{% icon "check" %}</td><td class="part">Needs an accountant</td><td class="no">{% icon "minus" %}</td></tr>
+          <tr><td>HRM, payroll &amp; owner insights built in</td><td class="us yes">{% icon "check" %}</td><td class="no">{% icon "minus" %}</td><td class="no">{% icon "minus" %}</td></tr>
           <tr><td>Works on any PC or phone</td><td class="us yes">{% icon "check" %}</td><td class="part">Windows only</td><td class="part">Phone only</td></tr>
           <tr><td>No install, automatic updates</td><td class="us yes">{% icon "check" %}</td><td class="no">{% icon "minus" %}</td><td class="yes">{% icon "check" %}</td></tr>
         </tbody>

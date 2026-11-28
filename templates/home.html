@@ -31,7 +31,7 @@
       </ul>
     </div>
     <figure class="receipt" aria-label="A sample Kashvo receipt">
-      <div class="receipt__head"><img src="{% static 'img/kashvo-symbol.svg' %}" alt="" width="34" height="34"><div><strong>Sharma General Store</strong><span>GSTIN 32ABCDE1234F1Z5</span></div></div>
+      <div class="receipt__head"><img src="{% static 'img/kashvo-symbol.svg' %}" alt="" width="34" height="34"><div><strong>Fresh Mart</strong><span>GSTIN 32ABCDE1234F1Z5</span></div></div>
       <dl><div><dt>Bill</dt><dd>INV-0142</dd></div><div><dt>Date</dt><dd>5 Nov 2026, 10:42 am</dd></div></dl>
       <table>
         <thead><tr><th>Item</th><th>Qty</th><th>Amount</th></tr></thead>
@@ -42,7 +42,7 @@
         </tbody>
       </table>
       <dl><div><dt>Taxable</dt><dd>₹1,692.38</dd></div><div><dt>GST</dt><dd>₹106.62</dd></div><div class="receipt__total"><dt>Total</dt><dd>₹1,799.00</dd></div></dl>
-      <div class="receipt__pay"><span class="qr"></span><span>Scan to pay with any UPI app<strong>Paid · UPI</strong></span></div>
+      <div class="receipt__pay"><img class="qr" src="{% static 'kashvo-qr.png' %}" alt="Scan to pay with any UPI app" width="64" height="64"><span>Scan to pay with any UPI app<strong>Paid · UPI</strong></span></div>
     </figure>
   </div>
 </section>
@@ -65,8 +65,10 @@
       <div class="feature"><div class="feature__icon">{% icon "boxes" %}</div><h3>Items &amp; stock</h3><p>Stock that updates with every bill, low-stock alerts, wholesale prices, promotions and printable barcode labels.</p></div>
       <div class="feature"><div class="feature__icon">{% icon "book-open" %}</div><h3>Books that balance</h3><p>Cash book, ledgers, journal, trial balance, profit &amp; loss and balance sheet. No double entry to learn.</p></div>
       <div class="feature"><div class="feature__icon">{% icon "file-down" %}</div><h3>Reports as PDF</h3><p>GSTR-1 and GSTR-3B summaries and every report ready to share as a clean PDF, for any dates you choose.</p></div>
+      <div class="feature"><div class="feature__icon">{% icon "users" %}</div><h3>HRM &amp; staff</h3><p>Attendance, shifts, salary advances and monthly payroll for your counter and back-office team.</p></div>
+      <div class="feature"><div class="feature__icon">{% icon "truck" %}</div><h3>Supply chain</h3><p>Purchase orders, supplier ledgers, reorder alerts and stock transfers across branches or godowns.</p></div>
+      <div class="feature"><div class="feature__icon">{% icon "trending-up" %}</div><h3>Owner insights</h3><p>Daily margins, fast-moving items, dead stock and cash-in-hand summaries at a single glance.</p></div>
     </div>
-    <p class="also">Also inside: HRM, supply chain and owner insights.</p>
   </div>
 </section>
 
@@ -83,12 +85,27 @@
           <li>{% icon "check" %}<span><strong>Keyboard first.</strong> F1 to F8 jump to search, quantity, discount and payment.</span></li>
         </ul>
       </div>
-      <div class="panel" aria-hidden="true">
-        <div class="panel__row"><span>Scan barcode</span><kbd>8901234567890</kbd></div>
-        <div class="panel__row"><span>Tea 250 g</span><span>₹145.00</span></div>
-        <div class="panel__row"><span>Sunflower oil 1 L × 3</span><span>₹474.00</span></div>
-        <div class="panel__row panel__row--total"><span>To pay</span><span>₹619.00</span></div>
-        <div class="panel__btns"><span>Cash</span><span class="on">UPI</span><span>Bank</span></div>
+      <div class="panel panel--live" data-pos-demo>
+        <div class="panel__top">
+          <span class="panel__dot"></span>
+          <span>POS Counter · Live preview</span>
+          <kbd>F1–F8</kbd>
+        </div>
+        <div class="panel__row"><span>Scan barcode</span><kbd data-pos-barcode>8901234567890</kbd></div>
+        <div class="panel__items" data-pos-items>
+          <div class="panel__row"><span>Tea 250 g</span><span>₹145.00</span></div>
+          <div class="panel__row"><span>Sunflower oil 1 L &times; 3</span><span>₹474.00</span></div>
+        </div>
+        <div class="panel__row panel__row--total"><span>To pay</span><span data-pos-total>₹619.00</span></div>
+        <div class="panel__btns" role="group" aria-label="Payment method">
+          <button type="button" data-pos-pay="cash">Cash</button>
+          <button type="button" class="on" data-pos-pay="upi">UPI</button>
+          <button type="button" data-pos-pay="bank">Bank</button>
+        </div>
+        <div class="panel__foot">
+          <span class="ok" data-pos-status>{% icon "qr-code" %} UPI QR ready · waiting for confirmation</span>
+          <button class="panel__add" type="button" data-pos-add>+ Scan sample item</button>
+        </div>
       </div>
     </div>
   </div>

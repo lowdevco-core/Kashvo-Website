@@ -26,7 +26,7 @@
   <link rel="icon" href="{% static 'img/favicon.ico' %}" sizes="any">
   <link rel="apple-touch-icon" href="{% static 'img/apple-touch-icon.png' %}">
   <link rel="preload" href="{% static 'fonts/plus-jakarta-sans-latin-700-normal.woff2' %}" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="{% static 'css/site.css' %}">
+  <link rel="stylesheet" href="{% static 'css/site.css' %}?v=20261128e">
 
   <script type="application/ld+json">
   {"@context":"https://schema.org","@graph":[
@@ -51,7 +51,7 @@
           <a href="{% url 'blog' %}" {% if page_key == 'blog' %}aria-current="page"{% endif %}>Blog</a>
         </div>
         <div class="top__cta">
-          <a class="btn btn--ghost" href="{{ APP_URL }}/login">Log in</a>
+          <a class="btn btn--ghost" href="{% url 'download_desktop_app' %}" data-download-app>Download app</a>
           <a class="btn btn--primary" href="{{ APP_URL }}/signup">Start free trial</a>
         </div>
       </nav>
@@ -81,16 +81,34 @@
           <img src="{% static 'img/kashvo-lockup.svg' %}" alt="Kashvo" width="124" height="37" loading="lazy">
           <p class="foot__tag">GST billing, POS and accounting for Indian retail, wholesale and service businesses.</p>
         </div>
-        <nav aria-label="Product"><h3>Product</h3><a href="{% url 'why' %}">Why Kashvo</a><a href="{% url 'pricing' %}">Pricing</a><a href="{{ APP_URL }}/signup">Start free trial</a></nav>
+        <nav aria-label="Product"><h3>Product</h3><a href="{% url 'why' %}">Why Kashvo</a><a href="{% url 'pricing' %}">Pricing</a><a href="{% url 'download_desktop_app' %}" data-download-app>Download app</a><a href="{{ APP_URL }}/signup">Start free trial</a></nav>
         <nav aria-label="Company"><h3>Company</h3><a href="{% url 'about' %}">About us</a><a href="{% url 'blog' %}">Blog</a></nav>
-        <nav aria-label="Contact"><h3>Contact</h3><a href="tel:{{ PHONE_LINK }}">{{ PHONE }}</a><a href="https://wa.me/{{ PHONE_LINK|slice:'1:' }}" target="_blank" rel="noopener">WhatsApp us</a><a href="{{ APP_URL }}/login">Log in</a></nav>
+        <nav aria-label="Contact"><h3>Contact</h3><a href="tel:{{ PHONE_LINK }}">{{ PHONE }}</a><a href="https://wa.me/{{ PHONE_LINK|slice:'1:' }}" target="_blank" rel="noopener">WhatsApp us</a></nav>
       </div>
       <div class="foot__legal"><p>&copy; {% now "Y" %} Kashvo. Made in India.</p><p>GST-ready billing for every counter.</p></div>
     </div>
   </footer>
 
+  <dialog class="pwa-dialog" id="pwa-dialog" aria-labelledby="pwa-dialog-title">
+    <div class="pwa-dialog__head">
+      <h2 id="pwa-dialog-title">Install Kashvo on your device</h2>
+      <button class="pwa-dialog__close" type="button" aria-label="Close" data-pwa-close>&times;</button>
+    </div>
+    <p class="pwa-dialog__lead">The desktop installer is for Windows &amp; Mac. On phones and tablets, add the Kashvo web app directly to your home screen:</p>
+    <ol class="pwa-dialog__steps" data-pwa-steps="android">
+      <li>Tap <strong>Open app.kashvo.in</strong> below.</li>
+      <li>Tap <strong>Install app</strong> when prompted, or open your browser menu (<strong>&vellip;</strong>) and choose <strong>Add to home screen</strong>.</li>
+    </ol>
+    <ol class="pwa-dialog__steps" data-pwa-steps="ios" hidden>
+      <li>Tap <strong>Open app.kashvo.in</strong> below in Safari.</li>
+      <li>Tap the <strong>Share</strong> icon and choose <strong>Add to Home Screen</strong>.</li>
+    </ol>
+    <a class="btn btn--primary btn--lg pwa-dialog__cta" href="{{ APP_URL }}/" target="_blank" rel="noopener">Open app.kashvo.in {% icon "arrow-right" %}</a>
+    <a class="pwa-dialog__fallback" href="{% url 'download_desktop_app' %}">Download desktop installer anyway</a>
+  </dialog>
+
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" defer></script>
-  <script src="{% static 'js/site.js' %}" defer></script>
+  <script src="{% static 'js/site.js' %}?v=20261128b" defer></script>
 </body>
 </html>

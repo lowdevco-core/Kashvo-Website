@@ -1,6 +1,9 @@
+from pathlib import Path
+
+from django.conf import settings
 from django.core.paginator import Paginator
 from django.db.models import Q
-from django.http import HttpResponse
+from django.http import FileResponse, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_GET
 
@@ -23,11 +26,15 @@ def blog_list(request, slug=None):
     q = request.GET.get("q", "").strip()
     if q:
         posts = posts.filter(Q(title__icontains=q) | Q(excerpt__icontains=q) | Q(body__icontains=q))
-    page_obj = Paginator(posts, 9).get_page(request.GET.get("page"))
+    page_num = request.GET.get("page")
+    featured = None if (q or slug or (page_num and str(page_num) != "1")) else Post.published.filter(featured=True).first()
+    if featured:
+        posts = posts.exclude(pk=featured.pk)
+    page_obj = Paginator(posts, 9).get_page(page_num)
     return render(request, "blog/list.html", {
         "page_obj": page_obj, "category": category, "q": q,
         "categories": Category.objects.filter(posts__status=Post.PUBLISHED).distinct(),
-        "featured": None if (q or slug or page_obj.number > 1) else Post.published.filter(featured=True).first(),
+        "featured": featured,
         "seo": PageSeo.objects.filter(page="blog").first(), "page_key": "blog",
     })
 
@@ -62,3 +69,24 @@ def custom_404(request, exception=None):
 
 def preview_404(request):
     return render(request, "404.html", status=404)
+
+
+@require_GET
+def download_desktop_app(request):
+    """Serve the desktop app installer from app-upload/ without accepting any user-supplied path."""
+    upload_dir = Path(getattr(settings, "APP_UPLOAD_DIR", Path(settings.BASE_DIR) / "app-upload")).resolve()
+    if not upload_dir.is_dir():
+        return render(request, "404.html", status=404)
+
+    candidates = [
+        p for p in upload_dir.iterdir()
+        if not p.name.startswith(".")
+        and not p.is_symlink()
+        and p.is_file()
+        and p.resolve().parent == upload_dir
+    ]
+    if not candidates:
+        return render(request, "404.html", status=404)
+
+    target = max(candidates, key=lambda p: p.stat().st_mtime)
+    return FileResponse(target.open("rb"), as_attachment=True, filename=target.name)

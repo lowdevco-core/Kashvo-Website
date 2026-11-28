@@ -162,3 +162,46 @@ class MediaCleanupTests(TestCase):
                 self.assertFalse(cover_path.is_file())
                 self.assertFalse(og_path.is_file())
                 self.assertFalse(body_img.is_file())
+
+
+class DesktopAppDownloadAndSecurityTests(TestCase):
+    def test_home_uses_qr_image_and_download_button(self):
+        r = self.client.get("/")
+        self.assertEqual(r.status_code, 200)
+        self.assertContains(r, "kashvo-qr.png")
+        self.assertContains(r, "/download-desktop-app/")
+        self.assertContains(r, "Download app")
+        self.assertContains(r, "data-download-app")
+        self.assertContains(r, "https://app.kashvo.in/")
+        self.assertNotContains(r, "/login")
+
+    def test_download_desktop_app_serves_uploaded_file_only(self):
+        import tempfile
+        from pathlib import Path
+        from django.test import override_settings
+
+        with tempfile.TemporaryDirectory() as tmp:
+            upload_dir = Path(tmp)
+            (upload_dir / ".gitkeep").write_bytes(b"")
+            with override_settings(APP_UPLOAD_DIR=upload_dir):
+                # Only .gitkeep present -> 404
+                self.assertEqual(self.client.get("/download-desktop-app/").status_code, 404)
+
+                installer = upload_dir / "Kashvo-Setup.exe"
+                installer.write_bytes(b"installer-binary-content")
+
+                r = self.client.get("/download-desktop-app/?file=../.env")
+                self.assertEqual(r.status_code, 200)
+                self.assertEqual(r["Content-Disposition"], 'attachment; filename="Kashvo-Setup.exe"')
+                self.assertEqual(b"".join(r.streaming_content), b"installer-binary-content")
+
+    def test_sensitive_and_arbitrary_paths_blocked(self):
+        for path in [
+            "/app-upload/",
+            "/app-upload/.gitkeep",
+            "/.env",
+            "/config/settings.py",
+            "/site.sqlite3",
+            "/download-desktop-app/../../.env",
+        ]:
+            self.assertEqual(self.client.get(path).status_code, 404, path)

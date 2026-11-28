@@ -1,33 +1,58 @@
 {% extends "base.html" %}
 {% block default_title %}Pricing · Kashvo GST billing &amp; POS software{% endblock %}
-{% block description %}{{ seo.meta_description|default:"Kashvo pricing: ₹999 a month or ₹9,999 a year, GST included. Every feature and unlimited users on both plans. Try it free for 7 days." }}{% endblock %}
+{% block description %}{{ seo.meta_description|default:"Kashvo pricing: ₹999 a month or ₹9,999 a year, plus GST. Every feature and unlimited users on both plans. Try it free for 7 days." }}{% endblock %}
 {% block keywords %}{{ seo.meta_keywords|default:"billing software price, GST software cost, POS software price India, billing software free trial, Kashvo pricing" }}{% endblock %}
 {% block content %}
 <section class="phero phero--center">
   <div class="wrap">
     <span class="eyebrow">Pricing</span>
-    <h1>One plan. Pay monthly or yearly.</h1>
-    <p class="lead">Every feature and unlimited users on both. Try it free for 7 days. Prices include GST.</p>
+    <h1>One plan. Billed like a real counter receipt.</h1>
+    <p class="lead">Every feature and unlimited users on both plans. Try it free for 7 days — no surprise add-ons.</p>
   </div>
 </section>
 
 <section class="section">
   <div class="wrap">
-    <div class="plans plans--2 stagger">
-      <div class="plan">
-        <div class="plan__top"><h3>Monthly</h3></div>
-        <div class="plan__price">₹999<small> / month</small></div>
-        <p class="plan__note">GST included. Cancel any time.</p>
-        <ul class="list"><li>{% icon "check" %}7-day free trial</li><li>{% icon "check" %}Unlimited users</li><li>{% icon "check" %}GST invoices and POS</li><li>{% icon "check" %}Thermal and A4 printing</li><li>{% icon "check" %}Books, GST reports and PDFs</li><li>{% icon "check" %}HRM, supply chain and owner insights</li></ul>
-        <a class="btn btn--light btn--lg" href="{{ APP_URL }}/signup">Start free trial</a>
-      </div>
-      <div class="plan plan--pop">
-        <div class="plan__top"><h3>Yearly</h3><span class="plan__badge">Save ₹1,989</span></div>
-        <div class="plan__price">₹9,999<small> / year</small></div>
-        <p class="plan__note">GST included. Two months free versus monthly.</p>
-        <ul class="list"><li>{% icon "check" %}7-day free trial</li><li>{% icon "check" %}Unlimited users</li><li>{% icon "check" %}Everything in Monthly</li></ul>
-        <a class="btn btn--primary btn--lg" href="{{ APP_URL }}/signup">Start free trial</a>
-      </div>
+    <div class="bills stagger">
+      <article class="bill">
+        <header class="bill__head">
+          <div>
+            <span class="bill__tag">BILL #M-01</span>
+            <h3>Monthly</h3>
+          </div>
+          <span class="bill__cycle">Cancel any time</span>
+        </header>
+        <div class="bill__price">₹999<small> / month</small></div>
+        <p class="bill__quip">~₹33/day — less than cutting chai. <span>(+ GST at checkout)</span></p>
+        <dl class="bill__lines">
+          <div><dt>POS, GST &amp; Accounting</dt><dd>Included</dd></div>
+          <div><dt>HRM, Supply Chain &amp; Insights</dt><dd>Included</dd></div>
+          <div><dt>Unlimited Users &amp; Counters</dt><dd>₹0</dd></div>
+          <div><dt>Double-Entry Headaches</dt><dd>₹0</dd></div>
+        </dl>
+        <div class="bill__total"><span>Due today (7-day free trial)</span><strong>₹0</strong></div>
+        <a class="btn btn--light btn--lg" href="{{ APP_URL }}/signup">Start 7-day free trial</a>
+      </article>
+
+      <article class="bill bill--pop">
+        <header class="bill__head">
+          <div>
+            <span class="bill__tag bill__tag--pop">BILL #Y-12</span>
+            <h3>Yearly</h3>
+          </div>
+          <span class="plan__badge">Save ₹1,989</span>
+        </header>
+        <div class="bill__price">₹9,999<small> / year</small></div>
+        <p class="bill__quip">~₹27/day — 2 months on the house. <span>(+ GST at checkout)</span></p>
+        <dl class="bill__lines">
+          <div><dt>POS, GST &amp; Accounting</dt><dd>Included</dd></div>
+          <div><dt>HRM, Supply Chain &amp; Insights</dt><dd>Included</dd></div>
+          <div><dt>Unlimited Users &amp; Counters</dt><dd>₹0</dd></div>
+          <div><dt>2 Months Free Bonus</dt><dd>Included</dd></div>
+        </dl>
+        <div class="bill__total"><span>Due today (7-day free trial)</span><strong>₹0</strong></div>
+        <a class="btn btn--primary btn--lg" href="{{ APP_URL }}/signup">Start 7-day free trial</a>
+      </article>
     </div>
   </div>
 </section>
@@ -37,7 +62,7 @@
     <div class="section-head section-head--center reveal"><span class="eyebrow">Pricing FAQ</span><h2>Good to know.</h2></div>
     <div class="faq stagger">
       <details><summary>How does the free trial work?{% icon "plus" %}</summary><p>You add a card when you sign up and use everything free for 7 days. If you don't cancel before the trial ends, your plan starts and the card is charged.</p></details>
-      <details><summary>Is GST included?{% icon "plus" %}</summary><p>Yes. ₹999 a month and ₹9,999 a year are the full prices, GST included.</p></details>
+      <details><summary>Is GST included?{% icon "plus" %}</summary><p>No. ₹999 a month and ₹9,999 a year are before tax; applicable GST is added at checkout.</p></details>
       <details><summary>What's the difference between the plans?{% icon "plus" %}</summary><p>Only how often you pay. Both have every feature and unlimited users. Yearly costs ₹1,989 less than twelve months of Monthly.</p></details>
     </div>
   </div>

@@ -16,6 +16,7 @@ urlpatterns = [
     path("blog/category/<slug:slug>/", views.blog_list, name="blog_category"),
     path("blog/<slug:slug>/", views.blog_detail, name="blog_detail"),
     path("404/", views.preview_404, name="preview_404"),
+    path("download-desktop-app/", views.download_desktop_app, name="download_desktop_app"),
     path("robots.txt", views.robots),
     path("sitemap.xml", sitemap, {"sitemaps": {"pages": StaticSitemap, "posts": PostSitemap}}, name="sitemap"),
     path("ckeditor5/", include("django_ckeditor_5.urls")),

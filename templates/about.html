@@ -19,7 +19,18 @@
       <p class="lead">We kept seeing shop owners juggle a billing app, a separate POS, a spreadsheet for stock and a folder of receipts for the accountant. None of them agreed at the end of the month.</p>
       <p class="lead">So we built one app where the bill is the accounting entry. Sell at the counter, and stock, GST and the books update together.</p>
     </div>
-    <blockquote class="card reveal"><p class="quote">Most billing software is built for accountants. We build for the person at the counter with a queue in front of them.</p></blockquote>
+    <div class="story-stack reveal">
+      <blockquote class="card"><p class="quote">Most billing software is built for accountants. We build for the person at the counter with a queue in front of them.</p></blockquote>
+      <div class="sync-flow" aria-label="How one bill updates everything">
+        <div class="sync-flow__trigger">{% icon "receipt-indian-rupee" %}<span>1 bill saved at the counter</span></div>
+        <div class="sync-flow__branches">
+          <div>{% icon "boxes" %}<b>Stock</b><span>Updated</span></div>
+          <div>{% icon "percent" %}<b>GST</b><span>Split &amp; filed</span></div>
+          <div>{% icon "book-open" %}<b>Books</b><span>Balanced</span></div>
+          <div>{% icon "qr-code" %}<b>UPI</b><span>Reconciled</span></div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -38,10 +49,10 @@
 <section class="section">
   <div class="wrap">
     <div class="facts reveal">
-      <div><b>Retail, wholesale, services</b><span>Who we build for</span></div>
-      <div><b>Any browser</b><span>PC or phone, nothing to install</span></div>
-      <div><b>GST-ready</b><span>CGST, SGST, IGST, GSTR-1, GSTR-3B</span></div>
-      <div><b>Made in India</b><span>For Indian businesses</span></div>
+      <div><span class="facts__icon">{% icon "store" %}</span><b>Retail, wholesale, services</b><span>Who we build for</span></div>
+      <div><span class="facts__icon">{% icon "monitor-smartphone" %}</span><b>Any browser</b><span>PC, tablet, phone or desktop app</span></div>
+      <div><span class="facts__icon">{% icon "file-text" %}</span><b>GST-ready</b><span>CGST, SGST, IGST, GSTR-1, GSTR-3B</span></div>
+      <div><span class="facts__icon">{% icon "map-pin" %}</span><b>Made in India</b><span>For Indian businesses</span></div>
     </div>
   </div>
 </section>
